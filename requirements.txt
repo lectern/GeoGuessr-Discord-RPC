@@ -1,2 +1,4 @@
 flask
 pypresence
+requests
+flask_restful
