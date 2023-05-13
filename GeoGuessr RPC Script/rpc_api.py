@@ -7,18 +7,21 @@ app = Flask(__name__)
 api = Api(app)
 
 title = ""
+url = ""
 
 class RPC(Resource):
     def get(self):
-        return {'data': title}, 200
+        return {'title': title, 'url': url}, 200
     
     def post(self):
-        global title
+        global title, url
         parser = reqparse.RequestParser()
         parser.add_argument('title', required=True)
+        parser.add_argument('url', required=True)
         
         args = parser.parse_args()
         title = args['title']
+        url = args['url']
 
         return {}, 200
 

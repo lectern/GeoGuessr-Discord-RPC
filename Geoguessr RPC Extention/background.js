@@ -3,11 +3,6 @@ function sleep(ms) {
   }
 
 async function updateRPC() {
-
-    const status = "Currently in lobby"
-    const map = "World"
-
-
     while (true) {
         // get all the tabs
 
@@ -21,7 +16,10 @@ async function updateRPC() {
                             'Accept':'application/json',
                             'Content-type':'application/json'
                         },
-                        body: JSON.stringify({ "title": tabs[i].title })
+                        body: JSON.stringify({ 
+                            "title": tabs[i].title,
+                            "url": tabs[i].url 
+                        })
                     })
                         .then(response => response.json())
                         .then(response => console.log(JSON.stringify(response)))
@@ -29,7 +27,6 @@ async function updateRPC() {
                 }       
             }
         });
-        
         await sleep(2500);
     }
 }

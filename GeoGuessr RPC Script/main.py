@@ -1,6 +1,6 @@
 from threading import Thread
 from pypresence import Presence
-import time, requests
+import time, requests, re
 
 import rpc_api
 
@@ -15,7 +15,8 @@ if __name__ == "__main__":
     start_time = time.time()
 
     while (True):
-        title = requests.get("http://127.0.0.1:5000/rpc").json()['data'].replace(' - GeoGuessr', "")
+        title = requests.get("http://127.0.0.1:5000/rpc").json()['title'].replace(' - GeoGuessr', "")
+        url = requests.get("http://127.0.0.1:5000/rpc").json()['url']
 
         map_name = ""
         if '- Game' in title:
@@ -42,6 +43,7 @@ if __name__ == "__main__":
             'Activities': 'Browsing Activity',
             'Ongong Games': 'Browsing Ongoing Games',
             'Profile Settings': 'Editing Profile Settings',
+            'Profile': 'Viewing Profile',
             'Quickplay': 'Playing Quickplay',
             'MapRunner': 'Playing MapRunner',
             'Start a game': 'Starting a Game',
@@ -49,7 +51,14 @@ if __name__ == "__main__":
             ' - Map': f'Looking at {map_name} Map'
         }
         status.setdefault(title, f'Playing {title}')
-        
+
+        if 'GeoGuessr - Let\'s explore the world!' == title and url != "https://www.geoguessr.com/":
+            try:
+                url = re.search(r"https://www.geoguessr.com/(.+)/.+", url).group(1)
+            except:
+                url = re.search(r"https://www.geoguessr.com/(.+)", url).group(1)
+            status['GeoGuessr - Let\'s explore the world!'] = f"Playing {url.replace('-', ' ').title()}"
+
         RPC.update(
             state=status[title],
             large_image='icon',
