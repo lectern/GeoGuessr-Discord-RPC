@@ -15,8 +15,9 @@ if __name__ == "__main__":
     start_time = time.time()
 
     while (True):
-        title = requests.get("http://127.0.0.1:5000/rpc").json()['title'].replace(' - GeoGuessr', "")
-        url = requests.get("http://127.0.0.1:5000/rpc").json()['url']
+        geoguessr = requests.get("http://127.0.0.1:5000/rpc").json()
+        title = geoguessr['title'].replace(' - GeoGuessr', "")
+        url = geoguessr['url']
 
         map_name = ""
         if '- Game' in title:
