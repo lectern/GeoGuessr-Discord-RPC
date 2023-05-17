@@ -1,1 +1,2 @@
-python.exe "GeoGuessr RPC Script\main.py"
+python "GeoGuessr RPC Script\main.py" %*
+pause

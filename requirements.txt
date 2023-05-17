@@ -2,4 +2,4 @@ flask
 pypresence
 requests
 flask_restful
-re
+regex
