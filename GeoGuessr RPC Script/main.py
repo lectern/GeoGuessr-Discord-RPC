@@ -49,7 +49,8 @@ if __name__ == "__main__":
             'MapRunner': 'Playing MapRunner',
             'Start a game': 'Starting a Game',
             ' - Game': f'Playing {map_name}',
-            ' - Map': f'Looking at {map_name} Map'
+            ' - Map': f'Looking at {map_name} Map',
+            'Just started playing...': 'Just started playing...'
         }
         status.setdefault(title, f'Playing {title}')
 

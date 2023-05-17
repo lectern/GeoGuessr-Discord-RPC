@@ -3,29 +3,6 @@ async function updateRPC() {
     var title = "";
     var url = "";
 
-    // on startup
-    chrome.tabs.query({url: "*://www.geoguessr.com/*"}, function(tabs) {
-        console.log("hiii")
-        if (tabs.length > 0) {
-            title = tabs[0].title;
-            url = tabs[0].url;
-
-            fetch('http://127.0.0.1:5000/rpc', {
-                method: 'POST',
-                headers: {
-                    'Accept':'application/json',
-                    'Content-type':'application/json'
-                },
-                body: JSON.stringify({ 
-                    "title": title,
-                    "url": url 
-                })
-            })
-                .then(response => response.json())
-                .then(response => console.log(JSON.stringify(response)))
-        }
-    });
-
     // continuous
     chrome.tabs.onUpdated.addListener(function(tabId, changeInfo, tab) {
         if (tab.url.includes("geoguessr.com") && (title.localeCompare(tab.title) || url.localeCompare(tab.url))) {
