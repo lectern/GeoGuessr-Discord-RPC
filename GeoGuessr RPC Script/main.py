@@ -61,11 +61,14 @@ if __name__ == "__main__":
                 url = re.search(r"https://www.geoguessr.com/(.+)", url).group(1)
             status['GeoGuessr - Let\'s explore the world!'] = f"Playing {url.replace('-', ' ').title()}"
 
-        RPC.update(
-            state=status[title],
-            large_image='icon',
-            start=start_time,
-            buttons=[{"label": "Play GeoGuessr", "url": "https://www.geoguessr.com/"}]
-        )
+        try:
+            RPC.update(
+                state=status[title],
+                large_image='icon',
+                start=start_time,
+                # buttons=[{"label": "Play GeoGuessr", "url": "https://www.geoguessr.com/"}]
+            )
+        except:
+            RPC.connect()
 
         time.sleep(2.5)
