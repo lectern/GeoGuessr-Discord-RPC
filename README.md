@@ -33,4 +33,4 @@ Others (MacOS/Linux):
 
 ![Playing a Game](https://media.discordapp.net/attachments/1049434216951197817/1101873437040967751/image.png)
 
-Feel free to contact me on discord @ Lectern#5112.
+Feel free to contact me on discord @ lectern
